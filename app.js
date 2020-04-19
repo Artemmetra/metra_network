@@ -1,8 +1,10 @@
+const menuTemp = [];
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const ipc = electron.ipcMain;
 const fs = require('fs');
+
 
 const {
   app,
@@ -12,7 +14,27 @@ const {
 
 let mainWindow;
 
-  mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, transparent: false, minWidth: 600, minHeight: 800, titleBarStyle: 'customButtonsOnHover', frame: false});
+// On app load
+app.on('ready', function() {
+  // Load all the necessary files to memory
+
+  /*load_file_JSON("./PROJECT/ht.json",(DATA)=>{
+    if(DATA == false){
+      save_docs();
+    }else{
+      HT = DATA;
+    }
+  })
+
+  load_file_JSON("./PROJECT/fav.json",(DATA)=>{
+    if(DATA == false){
+      save_docs();
+    }else{
+      faves = DATA;
+    }
+  })*/
+
+  mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800});
   mainWindow.webContents.openDevTools()
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -22,6 +44,7 @@ let mainWindow;
   }));
 
 
+
   mainWindow.on('closed', ()=>{
     mainWindow = null;
   })
@@ -29,25 +52,3 @@ let mainWindow;
   const mainMenu = Menu.buildFromTemplate(menuTemp);
   Menu.setApplicationMenu(mainMenu);
 });
-
-
-
-// TAKEN FROM NODE JS
-var inherits = function(ctor, superCtor) {
-  ctor.super_ = superCtor;
-  ctor.prototype = Object.create(superCtor.prototype, {
-    constructor: {
-      value: ctor,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-};
-
-let crypto;
-try {
-  crypto = require('crypto');
-} catch (err) {
-  console.log('crypto support is disabled!');
-}
