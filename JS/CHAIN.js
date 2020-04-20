@@ -1,28 +1,36 @@
 console.log("HELLO");
+
+//Crypro Library requirement
 var SHA = require("crypto-js/SHA256");
 
-// Block - TEXT
-// HASH
 
+//Objects stored in the chain - blocks
 let chain = [];
 
-function new_block(transaction,previous_hash){
+
+//creates a new block
+function new_block(data,previous_hash){
   let block = {};
 
-  block.data = transaction;
+  block.data = data;
   block.previous = previous_hash;
-  block.hash = SHA(JSON.stringify(transaction)).toString();
+  block.hash = SHA(JSON.stringify(data) + block.previous).toString();
 
-
+//push the new block to the chain array
   chain.push(block);
   return block;
 }
 
-let transaction = [5,-2,-3];
+//get the info of the latest block
+function getLatestBlock(){
+  return chain[chain.length-1];
+}
 
-//SHA(file.name).toString();
 
+let data = [5,-2,-3];
+
+//MAIN:
 
 new_block([],"START");
 
-new_block(transaction,chain[0].hash);
+new_block(data,chain[0].hash);
