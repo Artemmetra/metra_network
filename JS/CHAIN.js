@@ -21,3 +21,8 @@ function new_block(transaction,previous_hash){
 let transaction = [5,-2,-3];
 
 //SHA(file.name).toString();
+
+
+new_block([],"START");
+
+new_block(transaction,chain[0].hash);
