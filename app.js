@@ -19,11 +19,9 @@ let mainWindow;
 // On app load
 app.on('ready', function() {
   // Load all the necessary files to memory
-
   load_file_JSON("./DATA/ht.json",(DATA)=>{
     if(DATA == false){
-    
-    }else{
+      }else{
       HT = DATA;
     }
   })
