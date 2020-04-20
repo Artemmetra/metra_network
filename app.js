@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 const menuTemp = [];
 const electron = require('electron');
 const url = require('url');
@@ -52,6 +54,7 @@ app.on('ready', function() {
   const mainMenu = Menu.buildFromTemplate(menuTemp);
   Menu.setApplicationMenu(mainMenu);
 });
+<<<<<<< HEAD
 
 
 
@@ -63,3 +66,6 @@ function load_file_JSON(path,qx){
     qx(false);
   }
 }
+=======
+>>>>>>> f0fbb62a08f371530c87996bf60827e583b82897
+>>>>>>> 322a337f4d2bd988a76ee6aeecb1b7cfd617e732
