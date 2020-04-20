@@ -1,5 +1,5 @@
 console.log("HELLO");
-
+var SHA = require("crypto-js/SHA256");
 
 // Block - TEXT
 // HASH
@@ -17,3 +17,5 @@ function new_block(transaction){
 }
 
 let tr = [5,-2,-3];
+
+//SHA(file.name).toString();
