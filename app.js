@@ -3,6 +3,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const ipc = electron.ipcMain;
+let data;
 
 
 const fs = require('fs');
@@ -22,7 +23,7 @@ app.on('ready', function() {
   load_file_JSON("./DATA/ht.json",(DATA)=>{
     if(DATA == false){
       }else{
-      HT = DATA;
+      data = DATA;
     }
   })
 
@@ -33,10 +34,7 @@ app.on('ready', function() {
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true,
-
   }));
-
-
 
   mainWindow.on('closed', ()=>{
     mainWindow = null;
