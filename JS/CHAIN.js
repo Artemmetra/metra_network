@@ -29,6 +29,46 @@ function getLatestBlock(){
 
 let data = [5,-2,-3];
 
+//bin
+var limit = 10;
+var number= 0;
+
+//string
+
+//TRANSACTION:
+//TIME, SENDER CONTENT RECEIVER
+
+// Object = sender, receiver, content, time
+
+
+let bin = [];
+
+function transaction (sender, receiver, content, time){
+  let transaction = {sender: sender, receiver: receiver, content: content, time: time};
+
+  transaction.hash = SHA(JSON.stringify(transaction)).toString();
+  bin.push(transaction);
+  return transaction;
+}
+
+
+
+function bin_push(transaction){
+  //Receives object.
+  // Checks for available space in bin.
+  if (bin.length<limit){
+    bin.push(transaction);
+  }
+  else{
+    new_block(bin);
+    bin = [];
+  }
+  //If available => add object. Else => create new block.
+
+}
+
+
+
 //MAIN:
 
 new_block(data,chain[0].hash);
