@@ -2,10 +2,27 @@ console.log("HELLO");
 
 //Crypro Library requirement
 var SHA = require("crypto-js/SHA256");
+const fs = require('fs');
 
+/*
+function load_file_JSON(path,qx){
+  if (fs.existsSync(path)) {
+    data = fs.readFileSync(path, 'utf8');
+    qx(JSON.parse(data));
+  }else{
+    qx(false);
+  }
+}
+*/
 
-//Objects stored in the chain - blocks
+//  Check if chain exists in file
+
+//  if exists load from file
+
+//  else initiate
+//  Objects stored in the chain - blocks
 let chain = [{data:[],hash:"NONE",previous:"START"}];
+
 
 
 //creates a new block
@@ -30,8 +47,7 @@ function getLatestBlock(){
 let data = [5,-2,-3];
 
 //bin
-var limit = 10;
-var number= 0;
+
 
 //string
 
@@ -42,28 +58,34 @@ var number= 0;
 
 
 let bin = [];
+let limit = 10;
 
 function transaction (sender, receiver, content, time){
   let transaction = {sender: sender, receiver: receiver, content: content, time: time};
 
   transaction.hash = SHA(JSON.stringify(transaction)).toString();
-  bin.push(transaction);
-  return transaction;
+  bin_push(transaction);
+  console.log(transaction);
 }
 
 
 
+
 function bin_push(transaction){
-  //Receives object.
-  // Checks for available space in bin.
-  if (bin.length<limit){
+  //  Receives object.
+  //  Checks for available space in bin.
+  //  If available => add object. Else => create new block.
+
+  if (bin.length + 1 < limit){
     bin.push(transaction);
+    console.log("Adding to bin");
+  } else {
+    console.log("Creating new block");
+    new_block(JSON.stringify(bin));
+    bin = [transaction];
+    show_chain();
   }
-  else{
-    new_block(bin);
-    bin = [];
-  }
-  //If available => add object. Else => create new block.
+
 
 }
 

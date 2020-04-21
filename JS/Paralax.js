@@ -25,6 +25,7 @@ function dom(element){
 
 function parameter(element,parameters){
     let keys = Object.keys(parameters);
+
       Object.keys(parameters).forEach(key=>{
         let parameter = parameters[key];
         switch (key) {
@@ -47,6 +48,8 @@ function parameter(element,parameters){
         }
       })
 }
+
+
 
 function el(id){
   return document.getElementById(id);

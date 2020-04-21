@@ -1,7 +1,7 @@
 
 let chain_view = ['div',{'id':'chain_view','class_add':['data_construct','grid']},[]];
 
-let menu = [ button('ADD BLOCK','new_block([1,1,1]);show_chain()'), button('ADD TRANSACTION','console.log("button_2")')]
+let menu = [ button('ADD BLOCK','new_block([1,1,1]);show_chain()'), button('ADD TRANSACTION','transaction("sender", "receiver", "content", "time");console.log(bin.length)')]
 
 let header = ['header',{'id':'header','class_add':['grid']},menu];
 
