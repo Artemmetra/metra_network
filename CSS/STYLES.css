@@ -1,0 +1,49 @@
+body{
+  font-family: 'Didact Gothic';
+  margin: 0;
+  padding: 0;
+}
+
+#home{
+ width: 100vw;
+ height: calc(100vh - 25px);
+ grid-gap: 0px;
+ grid-auto-rows: 20px 1fr;
+ z-index: 99;
+}
+
+#chain_view{
+  grid-template-rows: repeat( auto-fit, 100px );
+  overflow-y: auto;
+  grid-gap: 5px;
+
+}
+
+#header{
+  /*background-color: #cc63cc;*/
+  background-color: black;
+  height: 100%;
+  z-index: 0;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.button{
+  background-color: black;
+  color: white;
+  height: 100%;
+}
+.button:hover{
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.grid{
+  display: grid;
+}
+
+
+.block{
+    grid-template-rows: repeat( auto-fit, 30px );
+    background-color: #cacaff;
+}

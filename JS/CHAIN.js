@@ -5,15 +5,15 @@ var SHA = require("crypto-js/SHA256");
 
 
 //Objects stored in the chain - blocks
-let chain = [];
+let chain = [{data:[],hash:"NONE",previous:"START"}];
 
 
 //creates a new block
-function new_block(data,previous_hash){
+function new_block(data){
   let block = {};
 
   block.data = data;
-  block.previous = previous_hash;
+  block.previous = getLatestBlock().hash;
   block.hash = SHA(JSON.stringify(data) + block.previous).toString();
 
 //push the new block to the chain array
@@ -31,6 +31,5 @@ let data = [5,-2,-3];
 
 //MAIN:
 
-new_block([],"START");
-
 new_block(data,chain[0].hash);
+new_block([-5,2,3],chain[0].hash);

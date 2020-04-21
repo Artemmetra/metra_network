@@ -1,0 +1,9 @@
+19-04-2020
+          *Implemented NODE.js, Electron.js
+          *Began the creation of the main chain
+
+20-04-2020
+          *Add simple chain visual representation in html
+          *Record the chain to file for continuity
+          *???
+          
