@@ -19,11 +19,12 @@ body{
 }
 
 #transaction_bin{
-  background-color: rgba(0, 152, 112, 0.39);
+
 }
 
 .transaction{
-  padding-bottom: 15px;
+  margin: 15px 0px;
+  background-color: rgba(0, 152, 112, 0.39);
 }
 
 #header{

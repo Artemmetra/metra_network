@@ -8,7 +8,7 @@
           V*  Create transaction simulation
 
 21-04-2020
-           *  BIN preparation & simulation
-           *  Finalize the file record
-           *  Theorize the hash tree file loading
-           *  Prepare the chain building and explain the process of block save
+          V*  Record the chain to file for continuity
+          V*  BIN preparation & simulation
+           *  Hash tree file loading
+           *  Chain building and block save
