@@ -1,8 +1,14 @@
 19-04-2020
-          *Implemented NODE.js, Electron.js
-          *Began the creation of the main chain
+          V*  Implemented NODE.js, Electron.js
+          V*  Began the creation of the main chain
 
 20-04-2020
-          *Add simple chain visual representation in html
-          *Record the chain to file for continuity
-          *Create transaction simulation
+          V*  Add simple chain visual representation in html
+        XXX*  Record the chain to file for continuity
+          V*  Create transaction simulation
+
+21-04-2020
+           *  BIN preparation & simulation
+           *  Finalize the file record
+           *  Theorize the hash tree file loading
+           *  Prepare the chain building and explain the process of block save
