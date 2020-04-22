@@ -2,6 +2,13 @@
 var SHA = require("crypto-js/SHA256");
 const fs = require('fs');
 
+// Overhead is the latest calculation of the transactions on the network.
+// It represents the current state of the network and can be calculated out of the data in the blocks.
+// Every set ammount of blocks, the overhead is saved as a new block and represents a savepoint in the chain.
+// Each new insstance that is downloading the block has to calculate the overhead and communicate its hash tree
+// through the network for review.
+let overhead  = {};
+
 
 function load_file_JSON(path,qx){
   if (fs.existsSync(path)) {
@@ -43,6 +50,14 @@ load_file_JSON("DATA/BIN.met",(data)=>{
    }
 });
 
+function load_multiple(array_of_files_to_load){
+  array_of_files_to_load.forEach(file=>{
+
+
+
+  })
+
+}
 
 //  if exists load from file
 
