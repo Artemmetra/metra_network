@@ -1,15 +1,38 @@
-let button = function(text,onclick) {
+let button = function(text,onclick,add_class) {
   return ['div',{
-                  'class_add':['button'],
+                  'class_add':add_class,
                   'textContent':text,
                   'onclick':onclick
                 },[]];
 }
-
+// Modify the block to make it cleaner for view and expandable for details
 let block = function(block_) {
   return ['div',{
                   'class_add':['block'],
-                },[data_line(block_.hash),data_line(block_.previous),data_line(block_.data)]];
+                },[
+                    collapse(block_.hash),
+                    collapsable([
+                              data_line(block_.previous),
+                              data_line(block_.data)
+                            ])
+                  ]
+                ];
+}
+
+let collapse = function(text){
+
+  return ['div',{
+                  'class_add':['collapse'],
+                  'onclick': 'collapse_(this)',
+                  'textContent': text
+                },[]];
+
+}
+
+let collapsable = function(children){
+  return ['div',{
+                  'class_add':['collapsable', 'hidden'],
+                },children];
 }
 
 let trx = function(transaction_) {
@@ -24,7 +47,7 @@ let trx = function(transaction_) {
 
 let data_line = function(data_) {
   return ['div',{
-                  'class_add':['data_line'],
+                  'class_add':['data_line','grid'],
                   'textContent':data_,
                 },[]];
 }
@@ -42,4 +65,13 @@ let data_entry_line = function(title,id){
                   'class_add':['data_entry_line','grid'],
                 },[data_line(title),textarea(id)]];
 
+}
+
+let top_bottom = function(ratio,children){
+  return ['div',{
+                  'class_add':['top_bottom','grid'],
+                  'style':[
+                             ['grid-template-rows',ratio]
+                           ],
+                },children];
 }

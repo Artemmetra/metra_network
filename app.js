@@ -28,7 +28,7 @@ app.on('ready', function() {
   })
 
 
-  mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800});
+  mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800, frame: false});
   mainWindow.webContents.openDevTools()
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),

@@ -97,10 +97,10 @@ function getLatestBlock(){
 
 
 
-function transaction (sender, receiver, content, time){
-  let transaction = {sender: sender, receiver: receiver, content: content, time: time};
+function transaction (name, data_1, data_2, data_3, time){
+  let transaction = {name: name, data_1: data_1, data_2: data_2, data_3: data_3, time: time};
 
-  transaction.hash = SHA(JSON.stringify(sender + receiver + content + time)).toString();
+  transaction.hash = SHA(JSON.stringify(name + time)).toString();
   bin_push(transaction);
   console.log(transaction);
 }
