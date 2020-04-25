@@ -1,5 +1,25 @@
 const {remote} = require('electron');
 
+
+function load_file_JSON(path,qx){
+  if (fs.existsSync(path)) {
+    let data = fs.readFileSync(path, 'utf8');
+    qx(JSON.parse(data));
+  }else{
+    qx(false);
+  }
+}
+
+function save_JSON_to(to_save, file_name,location) {
+  fs.writeFile(location+file_name, JSON.stringify(to_save), (err) => {
+          if (err) {
+          console.log(err);
+          } else {}
+  });
+}
+
+
+
 function transaction_send(){
   date = new Date();
   transaction(
@@ -64,6 +84,9 @@ let window = remote.getCurrentWindow();
 function collapse_(target){
   target.parentNode.childNodes.forEach(child=>{
     if(child.classList.contains("collapsable"))
-      {child.classList.toggle('hidden');}
+      {
+        //child.process();
+        child.classList.toggle('hidden');
+      }
   })
 }

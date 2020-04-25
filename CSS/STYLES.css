@@ -110,6 +110,8 @@ body{
 
 .page{
   height: calc(100vh - 20px);
+  padding: 10px 50px;
+  overflow-y: auto;
 }
 
 .transaction{
@@ -191,13 +193,18 @@ body{
 
 
 .block{
-    grid-template-rows: repeat( auto-fit, 30px );
+    /*grid-template-rows: repeat( auto-fit, 30px );*/
     margin-top: 20px;
 }
 .collapse{
     background-color: var(--main-menu-bg);/*var(--main-item-color);*/
     cursor: pointer;
-    direction: rtl;
+    margin-top: 10px;
+
+}
+
+.collapsable{
+  padding-left: 50px;
 }
 
 .data_entry_line{

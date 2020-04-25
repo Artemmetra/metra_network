@@ -5,27 +5,18 @@ const fs = require('fs');
 // Overhead is the latest calculation of the transactions on the network.
 // It represents the current state of the network and can be calculated out of the data in the blocks.
 // Every set ammount of blocks, the overhead is saved as a new block and represents a savepoint in the chain.
-// Each new insstance that is downloading the block has to calculate the overhead and communicate its hash tree
+// Each new instance that is downloading the block has to calculate the overhead and communicate its hash tree
 // through the network for review.
+
 let overhead  = {};
 
 
-function load_file_JSON(path,qx){
-  if (fs.existsSync(path)) {
-    let data = fs.readFileSync(path, 'utf8');
-    qx(JSON.parse(data));
-  }else{
-    qx(false);
-  }
-}
+// Each new SECTION or FUNCTION is created with its own new chain id, meaning that it is a chain of its own
+// the user downloads blocks and builds these chains on the machine constructing them to memory
+// every time the chain has to be updated, the mainchain will contain a trancastion with the new block for
+// said sub-chain for verification.
 
-function save_JSON_to(to_save, file_name,location) {
-  fs.writeFile(location+file_name, JSON.stringify(to_save), (err) => {
-          if (err) {
-          console.log(err);
-          } else {}
-  });
-}
+
 
 let chain = [];
 let bin = [];
@@ -50,10 +41,10 @@ load_file_JSON("DATA/BIN.met",(data)=>{
    }
 });
 
+
+// This function is unfinished
 function load_multiple(array_of_files_to_load){
   array_of_files_to_load.forEach(file=>{
-
-
 
   })
 

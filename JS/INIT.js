@@ -16,9 +16,6 @@ el('loader').parentNode.removeChild(el('loader'));
 
 // PAGE SECTIONS
 
-
-let chain_view = ['div',{'id':'chain_view','class_add':['data_construct']},[]];
-
 let transaction_view = ['div',{'id':'transaction_view','class_add':['data_construct','grid']},
                               [
                                   data_entry_line("Name:","transaction_name"),
@@ -29,6 +26,8 @@ let transaction_view = ['div',{'id':'transaction_view','class_add':['data_constr
                                   button("SEND","transaction_send();",["button"])
                               ]
                         ];
+
+
 let preview = ['div',{'id':'preview','class_add':['grid']},[]];
 
 let transaction_preview = p(
@@ -36,10 +35,8 @@ let transaction_preview = p(
                             {'id':'transaction_preview'}
                           );
 
-
 let transaction_entry = ['div',{'id':'transaction_entry', 'class_add':['grid']},[transaction_view,transaction_preview]];
 
-let transaction_bin = ['div',{'id':'transaction_bin','class_add':['data_construct']},[]];
 
 let menu = ['div',{'id':'header_menu'}, [ button('x','menu_buttons("x");',["header_button"]),
                                         button('min','menu_buttons("min");',["header_button"]),
@@ -53,7 +50,7 @@ let header = ['header',{'id':'header','class_add':['grid']},[draggable,menu]];
 
 let home_page =  ['div',{'id':'home_page','class_add':['grid','page']},[login_menu]];
 
-let chain_page =  ['div',{'id':'chain_page','class_add':['hidden','grid','page']},[transaction_bin,chain_view]];
+
 
 let transaction_page = ['div',{'id':'transaction_page','class_add':['hidden', 'grid','page']},[transaction_entry]];
 

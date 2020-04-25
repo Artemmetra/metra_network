@@ -25,14 +25,33 @@ function dom(element){
     }
 
     if(element[3]!=null){
-          element[3].forEach(function_=>{
-            result[function_] = fx_log[function_];
-          })
+      // we can make the function into an object with pair title and function
+          functions(result,element[3]);
     }
 
 
     return result;
 }
+function functions(element,functions_){
+  //let keys = Object.keys(functions_);
+
+  Object.keys(functions_).forEach(key=>{
+    let function_ = functions_[key];
+    switch (key) {
+      // Load a recorded function from the chain library
+      case "library":
+                        element[function_] = fx_log[function_];
+          break;
+      // Load a custom function
+      default:
+                        element[key] = function_;
+
+      break;
+    };
+  })
+
+}
+
 
 function parameter(element,parameters){
     let keys = Object.keys(parameters);

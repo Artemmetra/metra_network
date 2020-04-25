@@ -38,7 +38,12 @@ let collapse = function(text){
 let collapsable = function(children){
   return ['div',{
                   'class_add':['collapsable', 'hidden'],
-                },children];
+                },
+                children,
+                {
+                  "onclick":function(){console.log(this)},
+
+                }];
 }
 
 let trx = function(transaction_) {
