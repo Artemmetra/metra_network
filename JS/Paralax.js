@@ -12,13 +12,24 @@ function dom(element){
 //                      (1) Element type;   Such as:  'input','div','a' et cetera.
 //                      (2) Parameters;     Fed as:   {name:'name', id: 'id'...}.
 //                      (3) Children;       Hierarchically from left to right: [El1,El2].
+//                      (4) Functions;       Functions are binded to the dom element at birth
     //console.log(element);
     let result = document.createElement(element[0]);
+
     parameter(result,element[1]);
 
-    element[2].forEach(child=>{
-      result.appendChild(dom(child));
-    })
+    if(element[2]!=null){
+          element[2].forEach(child=>{
+            result.appendChild(dom(child));
+          })
+    }
+
+    if(element[3]!=null){
+          element[3].forEach(function_=>{
+            result[function_] = fx_log[function_];
+          })
+    }
+
 
     return result;
 }
@@ -74,6 +85,17 @@ function p(element,new_parameters){
     return element;
 }
 
+function f(element,new_functions){
+      if(element[2]!=null){
+        if(element[3]!=null){
+        return element[3] = element[3].concat(new_functions);
+      }else{
+        element[2] = {};
+        return element[3] = element[3].concat(new_functions);
+      }
+    }
+}
+
 function el(id){
   return document.getElementById(id);
 }
@@ -81,3 +103,16 @@ function el(id){
 function append(parent,child){
   el(parent).appendChild(dom(child));
 }
+
+
+
+//*//////////////////////////////////////////////////////////////////////////*//
+
+// The engine should have some method of function calling and handling
+
+// Given that all update-data happens on the network, there should be
+// a list of documents that are being tracked to see if the hash has changed
+
+// Each dom element can have a binding passing self as its value
+// functions can be recorded in the sections to provide functionality
+// to the interaction

@@ -49,18 +49,7 @@ let draggable = ['div',{'id':'draggable'},[]];
 
 let header = ['header',{'id':'header','class_add':['grid']},[draggable,menu]];
 
-let login_menu = ['div',{'id':'login_menu'},[
 
-                  user_login()
-                  // text on top
-
-                  // Username entry
-
-                  // Password entry
-
-                  // Submit button
-
-]];
 
 let home_page =  ['div',{'id':'home_page','class_add':['grid','page']},[login_menu]];
 
@@ -70,14 +59,16 @@ let transaction_page = ['div',{'id':'transaction_page','class_add':['hidden', 'g
 
 
 
-let home = ['div',{'id':'home','class_add':['grid']},[header, home_page ,transaction_page,chain_page]];
+
+
+let home = ['div',{'id':'home','class_add':['grid']},[header, home_page ,transaction_page,chain_page,timeline_page]];
 
 let left_menu = ['div',{'id':'left_menu','class_add':['grid']},[
 
                 button('⋈','toggle("home_page");',["main_menu_button"]),
                 button('▶','toggle("chain_page");',["main_menu_button"]),
                 button('✎','toggle("transaction_page");',["main_menu_button"]),
-                button('☀','animate();',["main_menu_button"]),
+                button('☀','toggle("timeline_page");',["main_menu_button"]),
 ]];
 
 let page = ['div',{'id':'page','class_add':['grid']},[left_menu,home]];

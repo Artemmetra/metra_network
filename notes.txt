@@ -17,4 +17,8 @@
           v*  Add page toggle for ease of view
            *  Hash tree file loading
            *  Chain building and block save
-           *  Transparent header   
+           *  Transparent header
+22-04-2020
+
+           * Move all SECTIONS from JS to app.js so that the pages are loaded behind the scenes
+             and are inaccessible from the command.

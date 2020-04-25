@@ -4,10 +4,12 @@
   --main-menu-bg: rgba(236, 172, 218, 0.21);
   --main-bg-color: #f5f5f5;
   --main-secondary-color: #ffbcbc;
+  --main-tetriary-color: #20a06d;
   --main-item-color: #ace9ec;
   --menu-button-height: 30px;
   --header-size: 25px;
-  --login-menu-size: 400px;
+  --login-menu-height: 250px;
+  --login-menu-width: 400px;
 
 }
 
@@ -28,7 +30,6 @@ body{
   overflow: hidden;
 }
 
-
 #left_menu{
   background-color: var(--main-menu-bg);
   grid-template-columns: 1fr;
@@ -40,11 +41,17 @@ body{
 }
 
 #login_menu{
-  margin: auto;
-  height: var(--login-menu-size);
-  width: var(--login-menu-size);
-  background-color: #20a06d;
+  margin: var(--login-menu-height) auto;
+  height: var(--login-menu-height);
+  width: var(--login-menu-width);
   box-shadow: 2px 15px 20px rgba(32,160,109, 0.4);
+}
+
+#user_login_box{
+  padding-top: 6px;
+  grid-gap: 6px;
+  height: 100%;
+  grid-template-rows: repeat( 3 , 1fr);
 }
 
 #home_page{
@@ -60,6 +67,13 @@ body{
 
 #chain_page{
     grid-template-rows: 1fr 4fr;
+}
+
+#timeline_page{
+  grid-gap: 10px;
+  grid-auto-rows: 90px;
+  padding: 80px;
+  overflow-y: auto;
 }
 
 #header{
@@ -145,8 +159,8 @@ body{
   outline: none;
   }
 
-.main_menu_button:hover {
-  background-color: #20a06d;
+.main_menu_button:hover, .submit_button:hover {
+  background-color:  var(--main-tetriary-color);
   /*background-color: var(--main-menu-color);*/
   box-shadow: 2px 15px 20px rgba(32,160,109, 0.4);
   color: #fff;
@@ -160,6 +174,17 @@ body{
   cursor: pointer;
 }
 
+.submit_button{
+  background-color: var(--main-menu-color);
+  display: grid;
+  align-content: space-around;
+  text-align: center;
+  font-size: 30px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  user-select: none;
+}
+
 .grid{
   display: grid;
 }
@@ -170,7 +195,7 @@ body{
     margin-top: 20px;
 }
 .collapse{
-    background-color: var(--main-item-color);
+    background-color: var(--main-menu-bg);/*var(--main-item-color);*/
     cursor: pointer;
     direction: rtl;
 }
@@ -183,10 +208,45 @@ body{
   resize: none;
 }
 
+.input{
+  font-size: 30px;
+  padding-left: 10px;
+  text-align: center;
+}
+.label{
+  font-size: 10px;
+}
+
 .hidden{
   display: none !important;
 }
 
+.icon{
+  color: black;
+  font-size: 2em;
+  text-align: center;
+  line-height: 25px;
+  transition: all 0.5s ease 0s;
+}
+
+.time_line_data_container{
+  display: grid;
+  grid-gap: 10px;
+}
+
+#time_entry_id:hover .icon{
+  color: black;
+  line-height: 65px;
+}
+
+#time_entry_id:hover .collapsable{
+  display: flex !important;
+}
+
+
+.time_entry{
+  /*  border: 1px solid black;*/
+}
 
 /*///////////////////////////////////////////////////////////////////////////*/
 .loader {

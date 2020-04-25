@@ -1,9 +1,13 @@
+let fx_log = {
+  log: function(){console.log(this)}
+}
+
 let button = function(text,onclick,add_class) {
   return ['div',{
                   'class_add':add_class,
                   'textContent':text,
                   'onclick':onclick
-                },[]];
+                }];
 }
 
 
@@ -59,7 +63,7 @@ let textarea = function(id){
   return ['textarea',{
                   'class_add':['textarea'],
                   'id':id
-                },[]];
+                }];
 }
 
 let data_entry_line = function(title,id){
@@ -76,4 +80,42 @@ let top_bottom = function(ratio,children){
                              ['grid-template-rows',ratio]
                            ],
                 },children];
+}
+
+let left_right = function(ratio,children){
+  return ['div',{
+                  'class_add':['left_right','grid'],
+                  'style':[
+                             ['grid-template-columns',ratio]
+                           ],
+                },children];
+}
+
+let input = function(type,id,placeholder){
+  return ['input',{
+                  'class_add':['input'],
+                  'type':type,
+                  'id':id,
+                  'placeholder':placeholder
+                }];
+};
+
+let label = function (text){
+  return ['label',{
+                  'class_add':['label'],
+                  'textContent':text,
+
+                }];
+}
+
+let icon = function(text){
+  return ['div',{
+                  'textContent':text,
+                  'class_add':['icon','grid'],
+                }];
+}
+
+let container = function(children){
+  return ['div',{
+  },children];
 }
