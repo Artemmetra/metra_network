@@ -16,27 +16,6 @@ el('loader').parentNode.removeChild(el('loader'));
 
 // PAGE SECTIONS
 
-let transaction_view = ['div',{'id':'transaction_view','class_add':['data_construct','grid']},
-                              [
-                                  data_entry_line("Name:","transaction_name"),
-                                  data_entry_line("Type:","transaction_type"),
-                                  data_entry_line("Parameters:","transaction_parameters"),
-                                  data_entry_line("Children:","transaction_children"),
-                                  data_entry_line("Input:","transaction_input"),
-                                  button("SEND","transaction_send();",["button"])
-                              ]
-                        ];
-
-
-let preview = ['div',{'id':'preview','class_add':['grid']},[]];
-
-let transaction_preview = p(
-                            top_bottom("4fr 1fr",[preview,button('Preview','console.log("Preview");preview_paralax()',["button"])]),
-                            {'id':'transaction_preview'}
-                          );
-
-let transaction_entry = ['div',{'id':'transaction_entry', 'class_add':['grid']},[transaction_view,transaction_preview]];
-
 
 let menu = ['div',{'id':'header_menu'}, [ button('x','menu_buttons("x");',["header_button"]),
                                         button('min','menu_buttons("min");',["header_button"]),
@@ -49,13 +28,6 @@ let header = ['header',{'id':'header','class_add':['grid']},[draggable,menu]];
 
 
 let home_page =  ['div',{'id':'home_page','class_add':['grid','page']},[login_menu]];
-
-
-
-let transaction_page = ['div',{'id':'transaction_page','class_add':['hidden', 'grid','page']},[transaction_entry]];
-
-
-
 
 
 let home = ['div',{'id':'home','class_add':['grid']},[header, home_page ,transaction_page,chain_page,timeline_page]];
