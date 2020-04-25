@@ -25,6 +25,7 @@ let transaction_view = ['div',{'id':'transaction_view','class_add':['data_constr
                                   data_entry_line("Type:","transaction_type"),
                                   data_entry_line("Parameters:","transaction_parameters"),
                                   data_entry_line("Children:","transaction_children"),
+                                  data_entry_line("Input:","transaction_input"),
                                   button("SEND","transaction_send();",["button"])
                               ]
                         ];
@@ -49,6 +50,8 @@ let draggable = ['div',{'id':'draggable'},[]];
 let header = ['header',{'id':'header','class_add':['grid']},[draggable,menu]];
 
 let login_menu = ['div',{'id':'login_menu'},[
+
+                  user_login()
                   // text on top
 
                   // Username entry
@@ -74,6 +77,7 @@ let left_menu = ['div',{'id':'left_menu','class_add':['grid']},[
                 button('⋈','toggle("home_page");',["main_menu_button"]),
                 button('▶','toggle("chain_page");',["main_menu_button"]),
                 button('✎','toggle("transaction_page");',["main_menu_button"]),
+                button('☀','animate();',["main_menu_button"]),
 ]];
 
 let page = ['div',{'id':'page','class_add':['grid']},[left_menu,home]];

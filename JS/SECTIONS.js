@@ -5,6 +5,8 @@ let button = function(text,onclick,add_class) {
                   'onclick':onclick
                 },[]];
 }
+
+
 // Modify the block to make it cleaner for view and expandable for details
 let block = function(block_) {
   return ['div',{

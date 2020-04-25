@@ -27,7 +27,8 @@ function preview_paralax(){
   let child = [type,parameters,children]
 
   append("preview",child)
-}catch(e){console.log(e)}
+
+  }catch(e){console.log(e)}
 
 }
 
