@@ -89,8 +89,8 @@ function refresh(element_id,source,type){
 }
 
 function animate(){
-  refresh('chain_view',chain,block);
-  refresh('transaction_bin',bin,trx);
+  //refresh('chain_view', main_chain[0], block);
+  //refresh('transaction_bin', bin, trx);
 
   /*setTimeout(function () {
     animate();

@@ -18,6 +18,14 @@ function save_JSON_to(to_save, file_name,location) {
   });
 }
 
+// This function is unfinished
+function load_multiple(array_of_files_to_load){
+  array_of_files_to_load.forEach(file=>{
+
+  })
+
+}
+
 
 
 function transaction_send(){

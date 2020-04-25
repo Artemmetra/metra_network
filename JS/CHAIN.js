@@ -18,17 +18,88 @@ let overhead  = {};
 
 
 
-let chain = [];
+class CHAIN {
+              // A CHAIN consists of a series of blocks used to construct the current state of an object
+              constructor(blocks, bin, id, description, parameters){
+                this.blocks = blocks;
+                this.bin = bin;
+                this.description = description;
+                this.parameters = parameters;
+                this.length = this.blocks.length;
+                this.id = id;
+                this.list = [];
+
+                main_chain[this.id] = this;
+
+              }
+
+              add_block(data,description){
+                // Treat block creation
+                // Verify the block to make sure it is acceptable
+                // Then add to memory
+                let block = new BLOCK(this, data, description);
+                this.list.unshift(block.hash);
+                this.blocks[block.hash] = block;
+              }
+
+              process(){
+                // Run through the chain to make sure the latest version of the chain is being used
+              }
+
+              getPrevious(){
+                // Provide the hash of the latest block
+                  this.list[0];
+              }
+
+              length(){
+                // Provides the current length of the chain
+                //return Object.keys(this.blocks).length
+                return this.length
+              }
+
+
+
+
+}
+
+class BLOCK {
+              // A BLOCK consists of the changes being applied to an object
+              constructor(chain, data, description){
+                this.data = data;
+                this.description = description;
+                this.previous = chain.getPrevious();
+                this.position = chain.length;
+                this.hash = SHA(JSON.stringify(this.data) + JSON.stringify(this.previous)).toString();
+              }
+}
+
+
+let main_chain = {};
+
+
+function l(id){
+  return main_chain[id];
+}
+
+
+// Sub-chains are recorded into the main_chain as parameters, and can be saved to memory this way
+
 let bin = [];
 let limit = 10;
 
 //  Check if CHAIN.met exists as file
 load_file_JSON("DATA/CHAIN.met",(data)=>{
    if(data){
-     chain = data;
+    Object.keys(data).forEach(c=>{
+        // Becasue JSON only saves the parameters of an object, we will reinitiate the CHAIN object with the parameters at start
+        // this implies that all of the blocks need to be readded separately if ever we start adding functionality to the blocks directly
+        let chain = data[c];
+        new CHAIN(chain.blocks, chain.bin, chain.id, chain.description, chain.parameters);
+    })
+     //main_chain = data;
    } else{
-     chain = [{data:[],hash:"NONE",previous:"START"}];
-     save_JSON_to(chain, "CHAIN.met","DATA/");
+     new CHAIN({},[],"0","MAIN CHAIN",[],[]);
+     save_JSON_to(main_chain, "CHAIN.met","DATA/");
    }
 });
 
@@ -37,23 +108,9 @@ load_file_JSON("DATA/BIN.met",(data)=>{
    if(data){
      bin = data;
    } else{
-     save_JSON_to(chain, "BIN.met","DATA/");
+     save_JSON_to(bin, "BIN.met","DATA/");
    }
 });
-
-
-// This function is unfinished
-function load_multiple(array_of_files_to_load){
-  array_of_files_to_load.forEach(file=>{
-
-  })
-
-}
-
-//  if exists load from file
-
-//  else initiate
-//  Objects stored in the chain - blocks
 
 
 //creates a new block
@@ -65,25 +122,14 @@ function new_block(data){
   block.hash = SHA(JSON.stringify(data) + block.previous).toString();
 
 //push the new block to the chain array
-  chain.unshift(block);
-  save_JSON_to(chain, "CHAIN.met","DATA/");
+  main_chain[0].unshift(block);
+  save_JSON_to(main_chain[0], "CHAIN.met","DATA/");
 }
 
 //get the info of the latest block
 function getLatestBlock(){
-  return chain[0];
+  return main_chain[0][0];
 }
-
-
-//bin
-
-
-//string
-
-//TRANSACTION:
-//TIME, SENDER CONTENT RECEIVER
-
-// Object = sender, receiver, content, time
 
 
 
