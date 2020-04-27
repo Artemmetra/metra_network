@@ -1,6 +1,7 @@
 /* VARIABLES ////////////////////////////////////////////*/
 :root {
   --main-menu-color: #f28a7f;
+  --main-menu-complementary: 	#bff8c4;
   --main-menu-bg: rgba(236, 172, 218, 0.21);
   --main-bg-color: #f5f5f5;
   --main-secondary-color: #ffbcbc;
@@ -10,16 +11,22 @@
   --header-size: 25px;
   --login-menu-height: 250px;
   --login-menu-width: 400px;
-
 }
 
 /* IDS      ////////////////////////////////////////////*/
+
+/* MIGRATE EVERYTHING TO PARALAX FOR CHAINING */
 
 body{
   font-family: 'Didact Gothic';
   margin: 0;
   padding: 0;
   background-color: var(--main-bg-color);
+}
+
+body  *::selection{
+    color:white;
+    background-color: black;
 }
 
 #page{
@@ -96,10 +103,12 @@ body{
   overflow-y: auto;
   grid-gap: 5px;
 }
-
 #transaction_entry{
-  height: 300px;
-  grid-template-columns: 2fr 1fr;
+  /*width: 80%;*/
+}
+
+#transaction_view > *{
+  margin-bottom: 20px;
 }
 
 #transaction_view{
@@ -126,6 +135,7 @@ body{
   height: 20px;
   text-align: center;
   user-select: none;
+  padding: 0px 20px;
 }
 
 .header_button{
@@ -166,7 +176,7 @@ body{
   /*background-color: var(--main-menu-color);*/
   box-shadow: 2px 15px 20px rgba(32,160,109, 0.4);
   color: #fff;
-  transform: translateY(-3px);
+  transform: translateY(-3px)  translateX(-2px);
 }
 
 
@@ -191,6 +201,18 @@ body{
   display: grid;
 }
 
+.flex{
+  display: flex;
+}
+
+.title_menu > div{
+  margin-right: 10px;
+}
+
+.title{
+  font-size: x-large;
+  padding-left: 20px;
+}
 
 .block{
     /*grid-template-rows: repeat( auto-fit, 30px );*/
@@ -200,7 +222,6 @@ body{
     background-color: var(--main-menu-bg);/*var(--main-item-color);*/
     cursor: pointer;
     margin-top: 10px;
-
 }
 
 .collapsable{
@@ -217,9 +238,12 @@ body{
 
 .input{
   font-size: 30px;
-  padding-left: 10px;
+  /*padding-left: 10px;*/
   text-align: center;
 }
+
+
+
 .label{
   font-size: 10px;
 }
@@ -253,6 +277,11 @@ body{
 
 .time_entry{
   /*  border: 1px solid black;*/
+}
+
+
+.width_100{
+  width: 100%;
 }
 
 /*///////////////////////////////////////////////////////////////////////////*/

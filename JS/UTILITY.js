@@ -40,27 +40,6 @@ function transaction_send(){
 }
 
 
-function preview_paralax(){
-  // Load a new paralax object from the transaction view and add it to the preview box
-  // ! The preview box should be later replaced with new electron window, so that is has its own dev tools
-  el('preview').childNodes.forEach(ch=>{
-                                        ch.parentNode.removeChild(ch);
-                                  });
-
-  try{
-  let type = el("transaction_type").value;
-  let parameters = JSON.parse("{"+el("transaction_parameters").value+"}");
-  let children = JSON.parse("["+el("transaction_children").value+"]");
-
-  let child = [type,parameters,children]
-
-  append("preview",child)
-
-  }catch(e){console.log(e)}
-
-}
-
-
 // Toggle display between pages of the app
 function toggle(page){
   let pages = document.getElementsByClassName("page");

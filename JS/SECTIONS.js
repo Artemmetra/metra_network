@@ -4,9 +4,9 @@ let fx_log = {
 
 let button = function(text,onclick,add_class) {
   return ['div',{
-                  'class_add':add_class,
                   'textContent':text,
-                  'onclick':onclick
+                  'onclick':onclick,
+                  'class_add':add_class,
                 }];
 }
 
@@ -91,7 +91,8 @@ let left_right = function(ratio,children){
   return ['div',{
                   'class_add':['left_right','grid'],
                   'style':[
-                             ['grid-template-columns',ratio]
+                             ['grid-template-columns',ratio],
+                             ['grid-gap','10px']
                            ],
                 },children];
 }
@@ -104,6 +105,106 @@ let input = function(type,id,placeholder){
                   'placeholder':placeholder
                 }];
 };
+
+
+let input_w_label = function(type,id,placeholder,label){
+  return p(container([
+
+    ['input',{
+                    'class_add':['title', 'transparent_input'],
+                    'type':type,
+                    'id':id,
+                    'name':label,
+                    'placeholder':placeholder
+                  }],
+
+    ['label',{
+                    'class_add':['input_label'],
+                    'for':label,
+                    'textContent':label
+                  }]
+
+  ]),{"class_add":['transparent_group']})
+}
+
+dom(["style",".transparent_group",{
+                                    'position'        : 'relative',
+                                    'padding'         : '15px 0 0',
+                                    'margin-top'      : '10px',
+                                  },[]]);
+
+
+dom(["style",".transparent_input",{
+                                    'font-family'     : 'inherit',
+                                    'width'           : '100%',
+                                    'border'          : '0',
+                                    'border-bottom'   : '2px solid var(--main-menu-complementary)',
+                                    'outline'         : '0',
+                                    'font-size'       : '1.3rem',
+                                    'padding'         : '7px 0',
+                                    'background'      : 'transparent',
+                                    'transition'      : 'all 0.3s',
+                                  },
+
+                                  [
+                                    ["::placeholder",{
+                                     "color"          : "transparent",
+                                   },[]],
+
+                                    [":placeholder-shown",{
+                                     "border-bottom"  : "2px solid var(--main-menu-color)",
+                                   },[
+                                                                                             [" ~ .input_label",{
+                                                                                               "color"         : "var(--main-menu-color)",
+                                                                                               "font-size"     : "1.3rem",
+                                                                                               "cursor"        : "text",
+                                                                                               "top"           : "20px",
+                                                                                            },[]],
+                                   ]],
+
+                                    [":required",{
+                                     "box-shadow"     : "none",
+                                   },[]],
+
+                                    [":invalid",{
+                                     "box-shadow"     : "none",
+                                   },[]],
+
+
+                                   [":focus",{
+                                     "padding-bottom" : "6px",
+                                     "border-width"   : "3px",
+                                     "border-color"   : "var(--main-menu-color)",
+                                  },[
+                                                                                          [" ~ .input_label",{
+                                                                                            "position"      : "absolute",
+                                                                                            "top"           : "0",
+                                                                                            "display"       : "block",
+                                                                                            "transition"    : "0.2s",
+                                                                                            "font-size"     : "1rem",
+                                                                                            "color"         : "var(--main-menu-color)",
+                                                                                            "font-weight"   : "700",
+                                                                                         },[]],
+                                  ]],
+
+
+]]);
+
+dom(["style",".input_label",{
+                                      "position"      : "absolute",
+                                      "top"           : "0",
+                                      "display"       : "block",
+                                      "transition"    : "0.2s",
+                                      "font-size"     : "1rem",
+                                      "color"         : "var(--main-bg-color)",
+                                  },[]]);
+
+
+
+
+
+/* /////////////////////////////////////////////////////////// */
+
 
 let label = function (text){
   return ['label',{

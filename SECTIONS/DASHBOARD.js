@@ -17,3 +17,5 @@ let user_login = function(text,onclick,add_class) {
 };
 
 let login_menu = ['div',{'id':'login_menu'},[user_login()]];
+
+let home_page =  ['div',{'id':'home_page','class_add':['hidden', 'grid','page']},[login_menu]];

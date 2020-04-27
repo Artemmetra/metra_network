@@ -27,7 +27,7 @@ let header = ['header',{'id':'header','class_add':['grid']},[draggable,menu]];
 
 
 
-let home_page =  ['div',{'id':'home_page','class_add':['grid','page']},[login_menu]];
+
 
 
 let home = ['div',{'id':'home','class_add':['grid']},[header, home_page ,transaction_page,chain_page,timeline_page]];
