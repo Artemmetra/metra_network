@@ -47,6 +47,7 @@ function toggle(page){
       pages[i].classList.add("hidden");
       el(page).classList.remove("hidden");
     }
+    if(page =="transaction_page")el("draggable").textContent = "Creation Page";
 }
 
 

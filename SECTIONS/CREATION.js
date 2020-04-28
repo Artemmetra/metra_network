@@ -8,9 +8,9 @@
 
 // parameter_name on change should generate a new parameter entry div
 
-let remove_parameter     = p(button("-","",['add_parameter','remove_parameter', 'to_reveal']),{'onclick':'remove_child(this.parentNode)'});
+let remove_parameter     = p(button("[-]","",['add_parameter','remove_parameter']),{'onclick':'remove_child(this.parentNode)'});
 
-let add_parameter        = nc(p(button("Add Parameter","",['add_parameter']),{'onclick':'new_parameter(this)'}),['to_reveal']);
+let add_parameter        = nc(p(button("Add Parameter","",['add_parameter']),{'onclick':'new_parameter(this)'}),[]);
 
 let parameter_           = nc(left_right('40px 200px 1fr',[
                                                           remove_parameter,
@@ -42,27 +42,24 @@ dom(['style','.remove_parameter',{'margin':'38px auto'}]);
 dom(['style','.add_parameter',{
                               /*'margin':'50px auto',*/
                               /*'width':'15px',*/
-                              'text-align':'center',
-                              'height':'26px',
-                              'font-size':'x-large',
-                              'padding':'0px 10px',
+                              /*'padding':'0px 10px',*/
                               /*'background-color':"var(--main-menu-color)",*/
+                              'direction':'rtl',
+                              'font-size':'0.8rem',
                               'user-select':'none',
                               'cursor':'pointer',
-                              'transition': 'all 0.1s ease 0s',
-                              'border-radius': '45px',
-                              'color':'white'}, [
+                              'transition': 'all 0.1s ease 0s'}, [
                                                   [':hover',{
-                                                            'background-color':'var(--main-tetriary-color)',
+                                                            /*'background-color':'var(--main-tetriary-color)',*/
                                                             'transform': 'translateY(-3px) translateX(-2px)',
-                                                            'box-shadow': '2px 15px 20px rgba(32,160,109, 0.4)',
+                                                            /*'box-shadow': '2px 15px 20px rgba(32,160,109, 0.4)',*/
 
                                                           }]
                               ]])
 
 
 function new_parameter(element){
-  element.parentNode.insertBefore(dom(parameter_), element);
+  element.after(dom(parameter_));
 }
 
 function remove_child(element){
@@ -70,8 +67,8 @@ function remove_child(element){
 }
 
 let parameters_sub    = ['div',{'id':'parameters_sub','class_add':['grid','revealer']},[
+                            add_parameter,
                             parameter_,
-                            add_parameter
                           ]
                         ];
 
@@ -79,10 +76,12 @@ let parameters_sub    = ['div',{'id':'parameters_sub','class_add':['grid','revea
 
 
 let title_menu = ['div',{'class_add':['title_menu','flex']},[
-                        data_line("Creation Page"),
+                        nc(data_line("Creation Page"),['page_title']),
                         button("SEND","transaction_send();",["button"]),
                         button('Preview','console.log("Preview");preview_paralax()',["button"])
                   ]];
+
+
 
 let preview = ['div',{'id':'preview','class_add':['grid']},[]];
 
@@ -154,4 +153,7 @@ let transaction_entry = ['div',{'id':'transaction_entry', 'class_add':[]},[trans
 
 
 
-let transaction_page = ['div',{'style':[['grid-template-rows','40px 1fr']],'id':'transaction_page','class_add':['grid','page']},[title_menu,transaction_entry,transaction_preview]];
+let transaction_page = ['div',{'style':[['grid-template-rows','40px 1fr']],'id':'transaction_page','class_add':['grid','page']},[transaction_entry,transaction_preview]];
+
+
+//append('draggable',title_menu);

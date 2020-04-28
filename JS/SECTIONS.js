@@ -140,7 +140,7 @@ dom(["style",".transparent_input",{
                                     'border'          : '0',
                                     'border-bottom'   : '2px solid var(--main-menu-complementary)',
                                     'outline'         : '0',
-                                    'font-size'       : '1.3rem',
+                                    'font-size'       : '0.8rem',
                                     'padding'         : '7px 0',
                                     'background'      : 'transparent',
                                     'transition'      : 'all 0.3s',
@@ -156,8 +156,9 @@ dom(["style",".transparent_input",{
                                    },[
                                                                                              [" ~ .input_label",{
                                                                                                "color"         : "var(--main-menu-color)",
-                                                                                               "font-size"     : "1.3rem",
+                                                                                               "font-size"     : "0.8rem",
                                                                                                "cursor"        : "text",
+                                                                                               "user-select"   : "none",
                                                                                                "top"           : "20px",
                                                                                             },[]],
                                    ]],
@@ -181,9 +182,8 @@ dom(["style",".transparent_input",{
                                                                                             "top"           : "0",
                                                                                             "display"       : "block",
                                                                                             "transition"    : "0.2s",
-                                                                                            "font-size"     : "1rem",
+                                                                                            "font-size"     : "0.8rem",
                                                                                             "color"         : "var(--main-menu-color)",
-                                                                                            "font-weight"   : "700",
                                                                                          },[]],
                                   ]],
 
