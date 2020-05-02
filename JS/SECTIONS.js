@@ -11,6 +11,8 @@ let button = function(text,onclick,add_class) {
 }
 
 
+
+
 // Modify the block to make it cleaner for view and expandable for details
 let block = function(block_) {
   return ['div',{

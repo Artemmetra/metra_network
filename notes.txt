@@ -22,3 +22,7 @@
 
            * Move all SECTIONS from JS to app.js so that the pages are loaded behind the scenes
              and are inaccessible from the command.
+
+02-04-2020
+
+          * Finalize chain saving

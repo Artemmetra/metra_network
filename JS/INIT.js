@@ -76,6 +76,8 @@ function animate(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // PAGE INITIALIZATION
-
-document.body.appendChild(dom(page));
+function init(){
+  document.body.appendChild(dom(page));
+}
+m('init','');
 animate();
