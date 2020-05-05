@@ -14,7 +14,7 @@
 22-04-2020
           V*  Change the interface
           V*  Modify transaction into code blocks
-          v*  Add page toggle for ease of view
+          V*  Add page toggle for ease of view
            *  Hash tree file loading
            *  Chain building and block save
            *  Transparent header
@@ -25,4 +25,4 @@
 
 02-04-2020
 
-          * Finalize chain saving
+           * Finalize chain saving

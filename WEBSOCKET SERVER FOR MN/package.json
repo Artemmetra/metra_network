@@ -1,0 +1,8 @@
+{
+  "name": "websocket_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "metra",
+  "license": "ISC"
+}

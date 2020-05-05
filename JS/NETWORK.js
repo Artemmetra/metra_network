@@ -6,3 +6,7 @@
 // We then can simulate transaction creation by submitting packets between instances that represent some
 // data transfers on a consistant interval. These packet transfers should generate transaction, that are
 // later recorded to the bins of each of the instance memories.
+
+
+// For the timebeing, socket.io will be used to run a simulated network
+// a simple socket will be created on a server to store and relay blocks to the test network 

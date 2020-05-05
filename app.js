@@ -2,7 +2,12 @@ const menuTemp = [];
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const { ipcMain } = require('electron')
+const { ipcMain } = require('electron');
+const readline = require('readline');
+
+
+
+
 let data;
 
 
@@ -19,13 +24,15 @@ let mainWindow;
 
 // On app load
 app.on('ready', function() {
-  // Load all the necessary files to memory
+
+  // What is this ?>
+  /*// Load all the necessary files to memory
   load_file_JSON("./DATA/ht.json",(DATA)=>{
     if(DATA == false){
       }else{
       data = DATA;
     }
-  })
+  })*/
 
 
   mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800, frame: false});
@@ -157,7 +164,7 @@ let limit = 10;
 
 
 
-
+/* DEPRECATED
 //creates a new block
 function new_block(data){
   let block = {};
@@ -172,8 +179,8 @@ function new_block(data){
 }
 
 //get the info of the latest block
-function getLatestBlock(){
-  return main_chain[0][0];
+function getLatestBlock(chain){
+  return main_chain[chain][0];
 }
 
 
@@ -186,7 +193,7 @@ function transaction (name, data_1, data_2, data_3, time){
   bin_push(transaction);
   console.log(transaction);
 }
-
+*/
 
 
 
@@ -278,3 +285,114 @@ ipcMain.on('m', (event, arg) => {
     console.log(e);
   }
 })
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHAIN BUILDING /////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Memory object contains the current state of all the objects tracked
+// Just like the main chain, the memory object should be stored to the file system for load
+let memory = {};
+let processing = [];
+let quarantine = [];
+
+
+// From the data saved in the CHAIN.met file, build the library of chains that are tracked.
+
+// Each chain should have the hash of the block where it originated, so that the users system could look through the chain
+// starting at the initializing block.
+
+// All tracked chains have to be dropped to system as JSON files for storing and modification.
+
+// Perhaps completed blocks could be saved to system as files and accessed when needed.
+
+// A hash table should specify in which block which transaction is located.
+
+// Within a block, a transaction modifying a specific block has to contain the hash of the chain as first element, the hash of the last element
+// the entry type and the data stored.
+
+// All operations are completed by the main-chain fx processor, the sub-chains function have to be completed using the fx processor.
+// Additions of new function to the main chain modifies the code of the running program and force the program to restart, while
+// modifications to the sub-chain functions utilizes already loaded functions and allows the program to remain uninterupted.
+
+// On each load, the chain receives all the latest blocks and processes them
+
+// if a followed sub-chain has been updated, the update function stores the transaction based on the hash of the target sub-chain and stores it to memory, then flushes the file to system.
+
+
+function update_object(hash,block){
+      try {
+
+        // In order to simplify the process of treating transactions, the creation of the followed sub-chain can be done directly in the update_object function
+
+        // Read whether the chain exists in memory
+        if(!Object.keys(main_chain).includes(hash)){
+                                                  // A new chain is created and the hash is added to the follow parameter of the main chain
+                                                  new CHAIN({}, [], hash, '', '');
+
+        }
+
+        // If the chain already exists, we log its new block to the chain
+        main_chain[hash].add_block(block.data,block.description);
+
+        // Send the processing a request to treat and update the current state in the memory object
+        processing.push([hash]);
+
+      } catch (e) {
+
+        console.log(e);
+
+      } finally {
+
+        // If the block has not been properly treated, the chain has to be quarantined and set for recalculation
+        quarantine.push(hash);
+      }
+
+}
+
+
+
+console.log('testing update_object');
+
+update_object(SHA('test').toString(),{data:'hh',description:"This is a test block",hash:SHA('test_block').toString()});
+
+
+update_object(SHA('test').toString(),{data:'gg',description:"This test block is an new addition to an existing block",hash:SHA('test_block_2').toString()});
+
+
+// Ok so we can add blocks and chains based on the transaction requests in the main_chain.
+
+// Next step is to simulate an addition to the main_chain, in such a way that while the program is functioning, it received a new block on timeout and adds it to the main_chain, it then verifies
+// the new block and reads it for new transactions. Within these transactions, we should test the creation of a new chain and a modification to an existing chain.
+
+
+var W3CWebSocket = require('websocket').w3cwebsocket;
+
+var client = new W3CWebSocket('ws://localhost:8080/', 'echo-protocol');
+
+client.onerror = function() {
+    console.log('Connection Error');
+};
+
+client.onopen = function() {
+    console.log('WebSocket Client Connected');
+
+    // Communicate client hash to server;
+    client.send(JSON.stringify({TYPE: 'LOGIN', CONTENT: SHA("SOME_HASH").toString()}));
+
+
+
+
+};
+
+client.onclose = function() {
+    console.log('echo-protocol Client Closed');
+};
+
+client.onmessage = function(e) {
+    if (typeof e.data === 'string') {
+        console.log("Received: '" + e.data + "'");
+    }
+};
