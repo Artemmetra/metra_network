@@ -5,6 +5,7 @@ const wss = new WebSocket.Server({ port: 8080 })
 const users = {};
 let user_keys = [];
 let chain = [];
+let blocks = {};
 
 // WS connection node serves as a relay for WebRTC connections
 // a minimization function has to communicate with the other nodes and als the clients to ping known nodes
@@ -17,6 +18,7 @@ let chain = [];
 // Load all the necessary files to memory
 // NEXT VERSION: Add workers to multiload
 function load_file_JSON(path,qx){
+    console.log(`LOADING ${path}`);
   if (fs.existsSync(path)) {
     try {
       data = fs.readFileSync(path, 'utf8');
@@ -40,7 +42,6 @@ function save_JSON_to(to_save, file_name,location) {
 
 
 load_file_JSON("CHAIN.mn",(data)=>{
-  console.log('LOADING CHAIN.mn');
    if(data){
      chain = data;
    } else{
@@ -48,21 +49,22 @@ load_file_JSON("CHAIN.mn",(data)=>{
    }
 });
 
-/*load_file_JSON("USER_KEYS.mn",(data)=>{
-    console.log('LOADING USER_KEYS.mn');
+load_file_JSON("BLOCKS.mn",(data)=>{
    if(data){
-     user_keys = data;
+     blocks = data;
+     console.log(`\nBLOCK IN MEMORY: ${blocks.length}\n`);
    } else{
-     save_JSON_to(user_keys, "USER_KEYS.mn","");
+     save_JSON_to(blocks, "BLOCKS.mn","");
+     console.log(`\nBLOCK IN MEMORY: ${blocks.length}\n`);
    }
-});*/
+});
 
 // NEXT CHANGE: Use workers to free the main process
 // Create multiple backups, in case server dies in the middle of a save
 function animate(){
   console.log(`${Date.now()}\tBackup initiated`);
     save_JSON_to(chain, "CHAIN.mn","");
-    /*save_JSON_to(user_keys, "USER_KEYS.mn","");*/
+    save_JSON_to(blocks, "BLOCKS.mn","");
 
     setTimeout(function () {
       animate();
@@ -74,8 +76,6 @@ animate()
 
 wss.on('connection', ws => {
   console.log('\nUSER CONNECTION INITIATED')
-
-
   ws.on('message', message => {
   let data = null
   let TYPE;
@@ -104,14 +104,49 @@ wss.on('connection', ws => {
 
 							}else{
 							console.log('NEW USER')
-							user_keys.push(CONTENT);
-							sendTo(ws, {TYPE: 'LOGIN', CONTENT: "NEW USER ADDED"})
-              save_JSON_to(user_keys, "USER_KEYS.mn","");
-							}
+              let found = false;
+              user_keys.forEach((item, i) => {
+                if(item[0] == CONTENT){
+                  item[1]++;
+                  found==true;}
+                  
+                  if(!found){
+                    user_keys.push([CONTENT,1]);
+                  }
+              });
 
-							NOTIFY_PEERS(CONTENT,'LOGIN');
+
+							sendTo(ws, {TYPE: 'LOGIN', CONTENT: "NEW USER ADDED"})
+							}
+              console.log(user_keys);
+							//NOTIFY_PEERS(CONTENT,'LOGIN');
 
 		break;
+
+    case 'LAST_BLOCK':
+
+            console.log(`Received: ${data.LAST}`);
+            console.log(data.BLOCK);
+              // CHECK IF CONNECTION SETTINGS ARE SET TO DOWNLOAD FROM NODE OR DOWNLOAD FROM PEERS
+              // FX !!
+              // IF SET TO DOWNLOAD FROM NODE:
+
+                // CHECK IF BLOCK IS IN CHAIN
+              if(blocks[data.LAST]){
+                // CHECK IF BLOCK IS LAST BLOCK
+                if(chain.indexOf(data.LAST)<chain.lenth){
+                  // IF NOT LAST BLOCK,
+                  // INITIATE TRANSFER OF BLOCKS ONE BY ONE UNTIL CONNECTION IS UP TO DATE
+                  block_update(chain.indexOf(data.LAST));
+                }
+              }else{
+                // Check node last block and ask client if they have this block;
+
+                // FOR NOW LETS ASSUME THAT THE NODE IS CORRECT AND THE SERVER IS BEHIND
+                blocks.push(data.LAST);
+                chain[data.LAST] = data.BLOCK;
+              }
+    break;
 
 		case 'CANDIDATE':
 
@@ -202,6 +237,11 @@ function sendTo(target, content){
 
 }
 
+function block_update(index_of_last_block){
+  // Starting from the last block send each block to client and wait for confirmation that the block has been received
+
+}
+
 function NOTIFY_PEERS(ID,TYPE){
 
 		switch(TYPE){
@@ -238,4 +278,4 @@ function NOTIFY_PEERS(ID,TYPE){
 
 };
 
-console.log("WebSocket RUNNING at port: 8080");
+console.log("WebSocket RUNNING on port: 8080");
