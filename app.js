@@ -6,7 +6,7 @@ const { ipcMain } = require('electron');
 const readline = require('readline');
 
 // Crypro Library requirement
-const global.SHA = require("crypto-js/SHA256");
+global.SHA = require("crypto-js/SHA256");
 const {CHAIN} = require('./JS/BLOCKCHAIN/CHAIN.js');
 const main_chain = mc;
 // CHAIN functions for ipcMAIN
@@ -17,7 +17,7 @@ const { app, BrowserWindow, Menu} = electron;
 let mainWindow;
 // On app load
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({  webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800, frame: false});
+  mainWindow = new BrowserWindow({ icon:'IMAGES/IDEAS/icon_type.jpg', webPreferences: {nodeIntegration: true}, minWidth: 600, minHeight: 800, frame: false});
   mainWindow.webContents.openDevTools()
   mainWindow.loadURL(url.format({
     // The index.html could be constructed on the app.js side and simply sent out. No need to have an index.html file
@@ -99,7 +99,7 @@ function update_object(hash,block){
         }
 
         // If the chain already exists, we log its new block to the chain
-        main_chain[hash].add_block(block.data,block.description);
+        main_chain[hash].add_block(block.data);
 
         // Send the processing a request to treat and update the current state in the memory object
         processing.push([hash]);
@@ -118,45 +118,43 @@ function update_object(hash,block){
 
 
 
-console.log('testing update_object');
-
-update_object(SHA('test').toString(),{data:'hh',description:"This is a test block",hash:SHA('test_block').toString()});
 
 
-update_object(SHA('test').toString(),{data:'gg',description:"This test block is an new addition to an existing block",hash:SHA('test_block_2').toString()});
+//update_object(SHA('test').toString(),{data:'hh',description:"This is a test block",hash:SHA('test_block').toString()});
+//update_object(SHA('test').toString(),{data:'gg',description:"This test block is an new addition to an existing block",hash:SHA('test_block_2').toString()});
 
 
 // Ok so we can add blocks and chains based on the transaction requests in the main_chain.
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// WEBSOCKET CONNECTION ///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Next step is to simulate an addition to the main_chain, in such a way that while the program is functioning, it received a new block on timeout and adds it to the main_chain, it then verifies
 // the new block and reads it for new transactions. Within these transactions, we should test the creation of a new chain and a modification to an existing chain.
 
-
+/*
 var W3CWebSocket = require('websocket').w3cwebsocket;
-
 var client = new W3CWebSocket('ws://localhost:8080/', 'echo-protocol');
-
 client.onerror = function() {
     console.log('Connection Error');
 };
-
 client.onopen = function() {
     console.log('WebSocket Client Connected');
-
     // Communicate client hash to server;
     client.send(JSON.stringify({TYPE: 'LOGIN', CONTENT: SHA("SOME_HASH").toString()}));
     connected();
 };
-
 client.onclose = function() {
     console.log('echo-protocol Client Closed');
 };
-
 client.onmessage = function(e) {
     if (typeof e.data === 'string') {
         console.log("Received: '" + e.data + "'");
     }
 };
+*/
 
 
 // We are now going to generate fictional blocks to see if the server node can push all missing blocks

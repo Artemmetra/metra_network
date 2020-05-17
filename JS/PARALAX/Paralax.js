@@ -175,3 +175,19 @@ console.log(document.getElementsByTagName('head')[0]);
 // Each dom element can have a binding passing self as its value
 // functions can be recorded in the sections to provide functionality
 // to the interaction
+
+// WHEN Paralax is moved to the server-side, the page will be passed as a dom element to the client
+
+const SHA = require('crypto-js/SHA256');
+class EL {
+              constructor(name,type,inputs,parameters,children){
+                this.name = name;
+                this.type = type;
+                this.inputs = inputs;
+                this.parameters = parameters;
+                this.children = children;
+                this.hash = SHA([type,name].toString()).toString();
+              }
+}
+
+// The ELK

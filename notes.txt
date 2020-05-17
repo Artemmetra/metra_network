@@ -26,3 +26,10 @@
 02-04-2020
 
            * Finalize chain saving
+
+10-05-2020
+
+             Restructuring the project  - Trello page organization
+
+             - Blockchain is put on the boiler
+             - Main project requirement => abilty to create and share in JSON paralax elements

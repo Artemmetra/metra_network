@@ -37,7 +37,7 @@ class CHAIN {
               }
 }
 
-CHAIN.add_block(data){
+CHAIN.add_block = (data)=>{
   // Treat block creation
   // Verify the block to make sure it is acceptable
   // Then add to memory
@@ -68,18 +68,18 @@ CHAIN.add_block(data){
     return false;
 }
 
-CHAIN.process(){
+CHAIN.process = ()=>{
   // Run through the chain to make sure the latest version of the chain is being used
 
   return true;
 }
 
-CHAIN.getPrevious(){
+CHAIN.getPrevious = ()=>{
   // Provide the hash of the latest block
     this.list[0];
 }
 
-CHAIN.length(){
+CHAIN.length = ()=>{
   // Provides the current length of the chain
   //return Object.keys(this.blocks).length
   return this.length
